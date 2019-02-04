@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Infor EAM</title>
+    <style type="text/css">
+      table.blueTable {
+        border: 1px solid #1c6ea4;
+        background-color: #eeeeee;
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+      }
+      table.blueTable td,
+      table.blueTable th {
+        border: 1px solid #aaaaaa;
+        padding: 3px 2px;
+      }
+      table.blueTable tbody td {
+        font-size: 13px;
+      }
+      table.blueTable tr:nth-child(even) {
+        background: #d0e4f5;
+      }
+      table.blueTable thead {
+        background: #1c6ea4;
+        background: -moz-linear-gradient(
+          top,
+          #5592bb 0%,
+          #327cad 66%,
+          #1c6ea4 100%
+        );
+        background: -webkit-linear-gradient(
+          top,
+          #5592bb 0%,
+          #327cad 66%,
+          #1c6ea4 100%
+        );
+        background: linear-gradient(
+          to bottom,
+          #5592bb 0%,
+          #327cad 66%,
+          #1c6ea4 100%
+        );
+        border-bottom: 2px solid #444444;
+      }
+      table.blueTable thead th {
+        font-size: 15px;
+        font-weight: bold;
+        color: #ffffff;
+        border-left: 2px solid #d0e4f5;
+      }
+      table.blueTable thead th:first-child {
+        border-left: none;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="panel.js"></script>
+    <h2 style="color: #2e6c80;">Properties:</h2>
+    <table class="blueTable">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>User Function</td>
+          <td><div id="userfunction">Nothing to show</div></td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td><div id="class">Nothing to show</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
