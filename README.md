@@ -27,3 +27,15 @@ chrome.devtools.panels.create("Имя вкладки", "", "index.html");
 2. Внутри окна DevTools нажмите Ctrl+Shift+I 
 3. ???
 4. PROFIT!
+
+Changelog:
+
+1.1 (05.02.2019)
++ Fields with values, labels, attributes
+
+1.0 (04.02.2019)
++ User function
++ Class
+
+TODO: 
+- (panel.js) Сделать корректное подтягивание лейблов для пользовательских полей
