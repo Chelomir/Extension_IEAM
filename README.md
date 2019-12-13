@@ -30,13 +30,12 @@ chrome.devtools.panels.create("Имя вкладки", "", "index.html");
 
 Changelog:
 
+1.2 (13.12.2019)
+* Fixes
+
 1.1 (05.02.2019)
 + Fields with values, labels, attributes
 
 1.0 (04.02.2019)
 + User function
 + Class
-
-TODO: 
-- (panel.js) Сделать корректное подтягивание лейблов для пользовательских полей
-- (panel.js) В столбце Value сделать отображение объектных значений (даты)

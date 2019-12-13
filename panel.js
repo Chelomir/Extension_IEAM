@@ -23,14 +23,23 @@ inspectedWindow.eval(
   );
 
 // All fields with values, labels, attributes
-// TODO: Сделать корректное подтягивание лейблов для пользовательских полей
-// TODO: В столбце Value сделать отображение объектных значений (даты)
-var code = "var vFormPanel = EAM.Utils.getScreen().getCurrentTab().getFormPanel();";
-code += "var fields = Object.entries(vFormPanel.getFldValues('all'));";
-code += "fields.forEach(function(field) {";
-code += "if (vFormPanel.getFld(field[0]).ownerCt) {field.push(vFormPanel.getFld(field[0]).ownerCt.fieldLabel);}";
-code += "field.push(vFormPanel.getFld(field[0]).currentAttribute);";
-code += "}); fields;";
+// TODO: Сделать вывод количества польз. полей. Возможно, стоит их как-то выделять
+var code = 
+    `var vFormPanel = EAM.Utils.getScreen().getCurrentTab().getFormPanel();
+    var arrFields = Object.entries(vFormPanel.getFldValues('all'));
+    var fields = [];
+    arrFields.forEach(function(arrField) {
+      var field = {
+        name: 		arrField[0],
+        value: 		(typeof arrField[1] === 'object' && arrField[1]) ? arrField[1].toString() : arrField[1],
+      };
+      var fld = vFormPanel.getFld(field.name);
+      field.label = (vFormPanel.getResponseData().labels[field.name]) ? (vFormPanel.getResponseData().labels[field.name].label) : null;
+      field.attribute = (fld.currentAttribute) ? (fld.currentAttribute) : null;
+      
+      fields.push(field);
+    });
+    fields;`;
 inspectedWindow.eval(
   code,
   function(result, isException) {
@@ -44,16 +53,16 @@ inspectedWindow.eval(
       result.forEach(function(field) {
         tablerow = document.createElement('tr');
         cellCode = document.createElement('td');
-        cellCode.innerHTML = field[0];
+        cellCode.innerHTML = field.name;
         tablerow.appendChild(cellCode);
         cellValue = document.createElement('td');
-        cellValue.innerHTML = field[1];
+        cellValue.innerHTML = field.value;
         tablerow.appendChild(cellValue);
         cellLabel = document.createElement('td');
-        cellLabel.innerHTML = field[2];
+        cellLabel.innerHTML = field.label;
         tablerow.appendChild(cellLabel);
         callAttribute = document.createElement('td');
-        callAttribute.innerHTML = field[3]? field[3] : '';
+        callAttribute.innerHTML = field.attribute;
         tablerow.appendChild(callAttribute);
         document.getElementById("fields").appendChild(tablerow);
       })
