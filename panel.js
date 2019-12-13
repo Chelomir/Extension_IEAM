@@ -23,7 +23,8 @@ inspectedWindow.eval(
   );
 
 // All fields with values, labels, attributes
-//TODO: Сделать корректное подтягивание лейблов для пользовательских полей
+// TODO: Сделать корректное подтягивание лейблов для пользовательских полей
+// TODO: В столбце Value сделать отображение объектных значений (даты)
 var code = "var vFormPanel = EAM.Utils.getScreen().getCurrentTab().getFormPanel();";
 code += "var fields = Object.entries(vFormPanel.getFldValues('all'));";
 code += "fields.forEach(function(field) {";
