@@ -36,7 +36,7 @@ var code =
       var fld = vFormPanel.getFld(field.name);
       field.label = (vFormPanel.getResponseData().labels[field.name]) ? (vFormPanel.getResponseData().labels[field.name].label) : null;
       field.attribute = (fld.currentAttribute) ? (fld.currentAttribute) : null;
-      
+      field.originalValue = (JSON.stringify(fld.value) != JSON.stringify(fld.originalValue)) ? fld.originalValue.toString() : null;
       fields.push(field);
     });
     fields;`;
@@ -58,6 +58,9 @@ inspectedWindow.eval(
         cellValue = document.createElement('td');
         cellValue.innerHTML = field.value;
         tablerow.appendChild(cellValue);
+        cellOriginalValue = document.createElement('td');
+        cellOriginalValue.innerHTML = field.originalValue;
+        tablerow.appendChild(cellOriginalValue);
         cellLabel = document.createElement('td');
         cellLabel.innerHTML = field.label;
         tablerow.appendChild(cellLabel);

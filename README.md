@@ -30,6 +30,9 @@ chrome.devtools.panels.create("Имя вкладки", "", "index.html");
 
 Changelog:
 
+1.3 (25.05.2021)
++ originalValue for changed fields
+
 1.2 (13.12.2019)
 * Fixes
 
