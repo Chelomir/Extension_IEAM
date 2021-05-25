@@ -22,6 +22,51 @@ inspectedWindow.eval(
     }
   );
 
+// tabs
+inspectedWindow.eval(
+  `var tabInfo = EAM.Utils.getScreen().pageData.tabInfo;
+  var tabs = [];
+  if (tabInfo.display){
+    for (let index = 0; index < tabInfo.display.length; index++) {
+      const displayed_tab = tabInfo.display[index];
+      tabs.push({itemId: displayed_tab.itemId, title: displayed_tab.title, isCurrent: (displayed_tab.itemId === tabInfo.current) ? "Yes" : "", isDisplayed: "Yes"});
+    }
+  }
+  if (tabInfo.dropList){
+    for (let index = 0; index < tabInfo.dropList.length; index++) {
+      const dropped_tab = tabInfo.dropList[index];
+      tabs.push({itemId: dropped_tab.itemId, title: dropped_tab.title, isCurrent: (dropped_tab.itemId === tabInfo.current) ? "Yes" : "", isDisplayed: ""});
+    }
+  }
+  tabs`,
+  function(result, isException) {
+    if (isException) console.log("cannot get tabInfo");
+    else {
+      result.forEach(function(tab) {
+        var tablerow = document.createElement('tr');
+
+        var cellItemId = document.createElement('td');
+        cellItemId.innerHTML = tab.itemId;
+        tablerow.appendChild(cellItemId);
+
+        var cellTitle = document.createElement('td');
+        cellTitle.innerHTML = tab.title;
+        tablerow.appendChild(cellTitle);
+
+        var cellIsCurrent = document.createElement('td');
+        cellIsCurrent.innerHTML = tab.isCurrent;
+        tablerow.appendChild(cellIsCurrent);
+
+        var cellIsDisplayed = document.createElement('td');
+        cellIsDisplayed.innerHTML = tab.isDisplayed;
+        tablerow.appendChild(cellIsDisplayed);
+
+        document.getElementById("tabs").appendChild(tablerow);
+      })
+    }
+  }
+);
+
 // All fields with values, labels, attributes
 // TODO: Сделать вывод количества польз. полей. Возможно, стоит их как-то выделять
 var code = 
@@ -45,28 +90,23 @@ inspectedWindow.eval(
   function(result, isException) {
     if (isException) console.log("cannot get fields");
     else {
-      var tablerow;
-      var cellCode;
-      var cellValue;
-      var cellLabel;
-      var callAttribute;
       result.forEach(function(field) {
-        tablerow = document.createElement('tr');
-        cellCode = document.createElement('td');
+        var tablerow = document.createElement('tr');
+        var cellCode = document.createElement('td');
         cellCode.innerHTML = field.name;
         tablerow.appendChild(cellCode);
-        cellValue = document.createElement('td');
+        var cellValue = document.createElement('td');
         cellValue.innerHTML = field.value;
         tablerow.appendChild(cellValue);
-        cellOriginalValue = document.createElement('td');
+        var cellOriginalValue = document.createElement('td');
         cellOriginalValue.innerHTML = field.originalValue;
         tablerow.appendChild(cellOriginalValue);
-        cellLabel = document.createElement('td');
+        var cellLabel = document.createElement('td');
         cellLabel.innerHTML = field.label;
         tablerow.appendChild(cellLabel);
-        callAttribute = document.createElement('td');
-        callAttribute.innerHTML = field.attribute;
-        tablerow.appendChild(callAttribute);
+        var cellAttribute = document.createElement('td');
+        cellAttribute.innerHTML = field.attribute;
+        tablerow.appendChild(cellAttribute);
         document.getElementById("fields").appendChild(tablerow);
       })
     }
